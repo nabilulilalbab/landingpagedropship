@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddf398fc-b30b-4b46-845d-41b2f26a2301" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/DjangoProject1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/landingpage/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/landingpage/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/landingpage/templates/landingpage/detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/landingpage/templates/landingpage/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/landingpage/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-    </list>
+    <list default="true" id="ddf398fc-b30b-4b46-845d-41b2f26a2301" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -113,7 +101,7 @@
       <updated>1734959635445</updated>
       <workItem from="1734959636483" duration="3513000" />
       <workItem from="1734966205263" duration="16886000" />
-      <workItem from="1735052591001" duration="299000" />
+      <workItem from="1735052591001" duration="602000" />
     </task>
     <servers />
   </component>
