@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddf398fc-b30b-4b46-845d-41b2f26a2301" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/DjangoProject1/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject1/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="ddf398fc-b30b-4b46-845d-41b2f26a2301" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,7 +101,7 @@
       <updated>1734959635445</updated>
       <workItem from="1734959636483" duration="3513000" />
       <workItem from="1734966205263" duration="16886000" />
-      <workItem from="1735052591001" duration="11540000" />
+      <workItem from="1735052591001" duration="11632000" />
     </task>
     <servers />
   </component>
