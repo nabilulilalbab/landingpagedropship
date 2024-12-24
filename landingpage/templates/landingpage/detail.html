@@ -66,167 +66,211 @@
                 </div>
             </div>
 
-            <!-- Formulir Order -->
-            <form
-                method="post"
-                action="{% url 'landingpage:create_order' product.slug %}"
-                x-data="orderForm()"
-                @submit.prevent="submitForm"
+
+<!-- Formulir Order -->
+        <!-- Formulir Order -->
+<!-- Formulir Order -->
+        <form
+            method="post"
+            action="{% url 'landingpage:create_order' product.slug %}"
+            x-data="orderFormData()"
+            @submit="submitForm($event)"
+        >
+            {% csrf_token %}
+
+            <!-- Nama Lengkap -->
+            <div class="form-control w-full mb-4">
+                <label class="label">
+                    <span class="label-text">Nama Lengkap</span>
+                </label>
+                <input
+                    type="text"
+                    name="name"
+                    x-model="name"
+                    required
+                    class="input input-bordered w-full"
+                    placeholder="Masukkan nama Anda"
+                />
+            </div>
+
+            <!-- Nomor WhatsApp -->
+            <div class="form-control w-full mb-4">
+                <label class="label">
+                    <span class="label-text">Nomor WhatsApp</span>
+                </label>
+                <input
+                    type="tel"
+                    name="whatsapp"
+                    x-model="whatsapp"
+                    required
+                    pattern="^(^\+62|62|^08)\d{8,13}$"
+                    class="input input-bordered w-full"
+                    placeholder="Contoh: 628123456789"
+                />
+                <label class="label" x-show="!isWhatsAppValid && whatsapp">
+                    <span class="label-text-alt text-error">Nomor WhatsApp tidak valid</span>
+                </label>
+            </div>
+
+            <!-- Accordion Alamat -->
+            <div
+                x-data="{ isOpen: false }"
+                class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mb-4"
             >
-                {% csrf_token %}
-
-                {% if messages %}
-                    <div class="mb-4">
-                        {% for message in messages %}
-                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-
-                <div class="form-control w-full mb-4">
-                    <label class="label">
-                        <span class="label-text">Nama Lengkap</span>
-                    </label>
-                    <input
-                        type="text"
-                        name="name"
-                        x-model="name"
-                        required
-                        class="input input-bordered w-full"
-                        placeholder="Masukkan nama Anda"
-                    />
-                </div>
-
-                <div class="form-control w-full mb-4">
-                    <label class="label">
-                        <span class="label-text">Nomor WhatsApp</span>
-                    </label>
-                    <input
-                        type="tel"
-                        name="whatsapp"
-                        x-model="whatsapp"
-                        required
-                        pattern="^(^\+62|62|^08)\d{8,13}$"
-                        class="input input-bordered w-full"
-                        placeholder="Contoh: 628123456789"
-                    />
-                </div>
-
-                <!-- Accordion untuk Alamat -->
-                <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mb-4">
-                    <input type="checkbox" />
-                    <div class="collapse-title text-xl font-medium">
-                        Informasi Alamat
-                    </div>
-                    <div class="collapse-content space-y-4">
-                        <div class="form-control w-full">
-                            <label class="label">
-                                <span class="label-text">Provinsi</span>
-                            </label>
-                            <input
-                                type="text"
-                                name="province"
-                                x-model="province"
-                                required
-                                class="input input-bordered w-full"
-                                placeholder="Masukkan nama provinsi"
-                            />
-                        </div>
-
-                        <div class="form-control w-full">
-                            <label class="label">
-                                <span class="label-text">Kota/Kabupaten</span>
-                            </label>
-                            <input
-                                type="text"
-                                name="city"
-                                x-model="city"
-                                required
-                                class="input input-bordered w-full"
-                                placeholder="Masukkan nama kota/kabupaten"
-                            />
-                        </div>
-
-                        <div class="form-control w-full">
-                            <label class="label">
-                                <span class="label-text">Kecamatan</span>
-                            </label>
-                            <input
-                                type="text"
-                                name="district"
-                                x-model="district"
-                                required
-                                class="input input-bordered w-full"
-                                placeholder="Masukkan nama kecamatan"
-                            />
-                        </div>
-
-                        <div class="form-control w-full">
-                            <label class="label">
-                                <span class="label-text">Kode Pos</span>
-                            </label>
-                            <input
-                                type="text"
-                                name="postal_code"
-                                x-model="postal_code"
-                                required
-                                pattern="\d{5}"
-                                class="input input-bordered w-full"
-                                placeholder="Masukkan Kode Pos 5 digit"
-                            />
-                        </div>
-
-                        <div class="form-control w-full">
-                            <label class="label">
-                                <span class="label-text">Alamat Lengkap</span>
-                            </label>
-                            <textarea
-                                name="street_address"
-                                x-model="street_address"
-                                required
-                                class="textarea textarea-bordered h-24"
-                                placeholder="Masukkan alamat lengkap (jalan, nomor rumah, dll)"
-                            ></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-control w-full mb-4">
-                    <label class="label">
-                        <span class="label-text">Jumlah</span>
-                    </label>
-                    <input
-                        type="number"
-                        name="quantity"
-                        x-model.number="quantity"
-                        min="1"
-                        max="{{ product.stock }}"
-                        class="input input-bordered w-full"
-                    />
-                </div>
-
-                <div class="form-control w-full mb-4">
-                    <label class="label">
-                        <span class="label-text">Catatan (Opsional)</span>
-                    </label>
-                    <textarea
-                        name ="notes"
-                        x-model="notes"
-                        class="textarea textarea-bordered h-24"
-                        placeholder="Tambahkan catatan untuk pesanan Anda"
-                    ></textarea>
-                </div>
-
-                <button
-                    type="submit"
-                    class="btn btn-primary w-full"
-                    :disabled="{{ product.stock }} == 0"
+                <input
+                    type="checkbox"
+                    x-model="isOpen"
+                    class="hidden"
+                />
+                <div
+                    @click="isOpen = !isOpen"
+                    class="collapse-title text-xl font-medium cursor-pointer"
                 >
-                    Beli Sekarang
-                </button>
-            </form>
+                    Informasi Alamat
+                </div>
+                <div
+                    x-show="isOpen"
+                    class="collapse-content space-y-4"
+                >
+                    <!-- Provinsi -->
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Provinsi</span>
+                        </label>
+                        <input
+                            type="text"
+                            name="province"
+                            x-model="province"
+                            required
+                            class="input input-bordered w-full"
+                            placeholder="Masukkan nama provinsi"
+                        />
+                    </div>
+
+                    <!-- Kota/Kabupaten -->
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Kota/Kabupaten</span>
+                        </label>
+                        <input
+                            type="text"
+                            name="city"
+                            x-model="city"
+                            required
+                            class="input input-bordered w-full"
+                            placeholder="Masukkan nama kota/kabupaten"
+                        />
+                    </div>
+
+                    <!-- Kecamatan -->
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Kecamatan</span>
+                        </label>
+                        <input
+                            type="text"
+                            name="district"
+                            x-model="district"
+                            required
+                            class="input input-bordered w-full"
+                            placeholder="Masukkan nama kecamatan"
+                        />
+                    </div>
+
+                    <!-- Kode Pos -->
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Kode Pos</span>
+                        </label>
+                        <input
+                            type="text"
+                            name="postal_code"
+                            x-model="postal_code"
+                            required
+                            pattern="\d{5}"
+                            class="input input-bordered w-full"
+                            placeholder="Masukkan Kode Pos 5 digit"
+                        />
+                        <label class="label" x-show="!isPostalCodeValid && postal_code">
+                            <span class="label-text-alt text-error">Kode Pos tidak valid</span>
+                        </label>
+                    </div>
+
+                    <!-- Alamat Lengkap -->
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Alamat Lengkap</span>
+                        </label>
+                        <textarea
+                            name="street_address"
+                            x-model="street_address"
+                            required
+                            class="textarea textarea-bordered h-24"
+                            placeholder="Masukkan alamat lengkap (jalan, nomor rumah, dll)"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion Detail Pesanan -->
+            <div
+                x-data="{ isOpen: false }"
+                class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mb-4"
+            >
+                <input
+                    type="checkbox"
+                    x-model="isOpen"
+                    class="hidden"
+                />
+                <div
+                    @click="isOpen = !isOpen"
+                    class="collapse-title text-xl font-medium cursor-pointer"
+                >
+                    Detail Pesanan
+                </div>
+                <div
+                    x-show="isOpen"
+                    class="collapse-content space-y-4"
+                >
+                    <!-- Jumlah -->
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Jumlah</span>
+                        </label>
+                        <input
+                            type="number"
+                            name="quantity"
+                            x-model.number="quantity"
+                            min="1"
+                            max="{{ product.stock }}"
+                            class="input input-bordered w-full"
+                        />
+                    </div>
+
+                    <!-- Catatan -->
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Catatan (Opsional)</span>
+                        </label>
+                        <textarea
+                            name="notes"
+                            x-model="notes"
+                            class="textarea textarea-bordered h-24"
+                            placeholder="Tambahkan catatan untuk pesanan Anda"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol Submit -->
+            <button
+                type="submit"
+                class="btn btn-primary w-full"
+                :disabled="{{ product.stock }} == 0"
+            >
+                Beli Sekarang
+            </button>
+        </form>
         </div>
     </div>
     <!-- Deskripsi Lengkap -->
@@ -484,7 +528,8 @@
         </div>
     </div>
 </div>
-    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox-plus-jquery.min.js"></script>
+    <!-- Di bagian head atau sebelum penutup body -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 {% endblock %}
 
 {% block extra_js %}
@@ -492,83 +537,101 @@
 <script>
 
     function imageGallery() {
-    return {
-        images: [
-            {% for image in image_byproduct %}
-                {% if image.image %}
-                    "{{ image.image.url }}",
-                {% endif %}
-            {% endfor %}
-        ],
-        selectedImage: null,
-        currentIndex: 0,
-
-        openImage(imageUrl) {
-            this.selectedImage = imageUrl;
-            this.currentIndex = this.images.indexOf(imageUrl);
-            document.body.style.overflow = 'hidden';
-        },
-
-        closeImage() {
-            this.selectedImage = null;
-            document.body.style.overflow = 'auto';
-        },
-
-        prevImage() {
-            this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
-            this.selectedImage = this.images[this.currentIndex];
-        },
-
-        nextImage() {
-            this.currentIndex = (this.currentIndex + 1) % this.images.length;
-            this.selectedImage = this.images[this.currentIndex];
-        }
-    }
-}
-
-
-
-    function orderForm() {
         return {
-            name: '',
-            whatsapp: '',
-            province: '',
-            city: '',
-            district: '',
-            postal_code: '',
-            street_address: '',
-            quantity: 1,
-            notes: '',
+            images: [
+                {% for image in image_byproduct %}
+                    {% if image.image %}
+                        "{{ image.image.url }}",
+                    {% endif %}
+                {% endfor %}
+            ],
+            selectedImage: null,
+            currentIndex: 0,
 
-            get isWhatsAppValid() {
-                const whatsappRegex = /^(^\+62|62|^08)\d{8,13}$/
-                return whatsappRegex.test(this.whatsapp)
+            openImage(imageUrl) {
+                this.selectedImage = imageUrl;
+                this.currentIndex = this.images.indexOf(imageUrl);
+                document.body.style.overflow = 'hidden';
             },
 
-            get isPostalCodeValid() {
-                return /^\d{5}$/.test(this.postal_code)
+            closeImage() {
+                this.selectedImage = null;
+                document.body.style.overflow = 'auto';
             },
 
-            get isFormValid() {
-                return this.name.trim() !== '' &&
-                       this.isWhatsAppValid &&
-                       this.province.trim() !== '' &&
-                       this.city.trim() !== '' &&
-                       this.district.trim() !== '' &&
-                       this.isPostalCodeValid &&
-                       this.street_address.trim() !== '' &&
-                       this.quantity > 0
+            prevImage() {
+                this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+                this.selectedImage = this.images[this.currentIndex];
             },
 
-            submitForm() {
-                if (this.isFormValid) {
-                    this.$el.submit()
-                } else {
-                    alert('Mohon lengkapi form dengan benar')
-                }
+            nextImage() {
+                this.currentIndex = (this.currentIndex + 1) % this.images.length;
+                this.selectedImage = this.images[this.currentIndex];
             }
         }
     }
+
+
+
+
+    document.addEventListener('alpine:init', () => {
+    Alpine.data('orderFormData', () => ({
+        // Inisialisasi default values
+        name: '',
+        whatsapp: '',
+        province: '',
+        city: '',
+        district: '',
+        postal_code: '',
+        street_address: '',
+        quantity: 1,
+        notes: '',
+
+        // Validasi WhatsApp
+        get isWhatsAppValid() {
+            const whatsappRegex = /^(^\+62|62|^08)\d{8,13}$/
+            return whatsappRegex.test(this.whatsapp)
+        },
+
+        // Validasi Kode Pos
+        get isPostalCodeValid() {
+            return /^\d{5}$/.test(this.postal_code)
+        },
+
+        // Validasi Keseluruhan Form
+        get isFormValid() {
+            return this.name.trim() !== '' &&
+                   this.isWhatsAppValid &&
+                   this.province.trim() !== '' &&
+                   this.city.trim() !== '' &&
+                   this.district.trim() !== '' &&
+                   this.isPostalCodeValid &&
+                   this.street_address.trim() !== '' &&
+                   this.quantity > 0
+        },
+
+        // Metode Submit Form
+        submitForm(event) {
+            // Tambahkan console.log untuk debugging
+            console.log('Submitting form', {
+                name: this.name,
+                whatsapp: this.whatsapp,
+                isValid: this.isFormValid
+            });
+
+            // Jika form valid, submit
+            if (this.isFormValid) {
+                // Izinkan form untuk disubmit
+                return true;
+            } else {
+                // Cegah submit dan tampilkan pesan
+                event.preventDefault();
+                alert('Mohon lengkapi form dengan benar');
+                return false;
+            }
+        }
+    }));
+});
 </script>
 {% endblock %}
 
