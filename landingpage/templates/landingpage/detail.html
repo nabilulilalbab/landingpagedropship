@@ -1,0 +1,317 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% include 'navbar.html' %}
+<div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Gambar Produk -->
+        <div class="order-1 md:order-1">
+            <img
+                src="{{ product.image.url }}"
+                alt="{{ product.name }}"
+                class="w-full rounded-lg object-cover max-h-[500px] shadow-lg"
+            />
+        </div>
+
+        <!-- Informasi Produk -->
+        <div class="order-2 md:order-2">
+            <h1 class="text-2xl md:text-3xl font-bold mb-4">{{ product.name }}</h1>
+
+            <!-- Harga -->
+            <div class="flex flex-wrap items-center mb-4">
+                {% if product.discount %}
+                    <span class="text-xl md:text-2xl font-bold text-primary mr-4">
+                        Rp {{ product.discount|floatformat:0 }}
+                    </span>
+                    <span class="line-through text-gray-400 mr-2">
+                        Rp {{ product.price|floatformat:0 }}
+                    </span>
+                    <span class="badge badge-secondary">
+                        {{ product.discount_percentage }}% OFF
+                    </span>
+                {% else %}
+                    <span class="text-xl md:text-2xl font-bold text-primary">
+                        Rp {{ product.price|floatformat:0 }}
+                    </span>
+                {% endif %}
+            </div>
+
+            <!-- Deskripsi Singkat -->
+            <p class="mb-4 text-sm md:text-base text-gray-600">{{ product.hook }}</p>
+
+            <!-- Stok dan Kondisi -->
+            <div class="flex flex-wrap gap-4 mb-4">
+                <div>
+                    <span class="font-semibold mr-2">Stok:</span>
+                    {% if product.stock > 0 %}
+                        <span class="text-success font-medium">
+                            Tersedia ({{ product.stock }} item)
+                        </span>
+                    {% else %}
+                        <span class="text-error font-medium">Stok Habis</span>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <span class="font-semibold mr-2">Kondisi:</span>
+                    {% if product.condition == 'new' %}
+                        <span class="badge badge-primary">Baru</span>
+                    {% else %}
+                        <span class="badge badge-warning">Baru</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Formulir Order -->
+            <form
+                method="post"
+                action="{% url 'landingpage:create_order' product.slug %}"
+                x-data="orderForm()"
+                @submit.prevent="submitForm"
+            >
+                {% csrf_token %}
+
+                {% if messages %}
+                    <div class="mb-4">
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-control w-full mb-4">
+                    <label class="label">
+                        <span class="label-text">Nama Lengkap</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="name"
+                        x-model="name"
+                        required
+                        class="input input-bordered w-full"
+                        placeholder="Masukkan nama Anda"
+                    />
+                </div>
+
+                <div class="form-control w-full mb-4">
+                    <label class="label">
+                        <span class="label-text">Nomor WhatsApp</span>
+                    </label>
+                    <input
+                        type="tel"
+                        name="whatsapp"
+                        x-model="whatsapp"
+                        required
+                        pattern="^(^\+62|62|^08)\d{8,13}$"
+                        class="input input-bordered w-full"
+                        placeholder="Contoh: 628123456789"
+                    />
+                </div>
+
+                <!-- Accordion untuk Alamat -->
+                <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box mb-4">
+                    <input type="checkbox" />
+                    <div class="collapse-title text-xl font-medium">
+                        Informasi Alamat
+                    </div>
+                    <div class="collapse-content space-y-4">
+                        <div class="form-control w-full">
+                            <label class="label">
+                                <span class="label-text">Provinsi</span>
+                            </label>
+                            <input
+                                type="text"
+                                name="province"
+                                x-model="province"
+                                required
+                                class="input input-bordered w-full"
+                                placeholder="Masukkan nama provinsi"
+                            />
+                        </div>
+
+                        <div class="form-control w-full">
+                            <label class="label">
+                                <span class="label-text">Kota/Kabupaten</span>
+                            </label>
+                            <input
+                                type="text"
+                                name="city"
+                                x-model="city"
+                                required
+                                class="input input-bordered w-full"
+                                placeholder="Masukkan nama kota/kabupaten"
+                            />
+                        </div>
+
+                        <div class="form-control w-full">
+                            <label class="label">
+                                <span class="label-text">Kecamatan</span>
+                            </label>
+                            <input
+                                type="text"
+                                name="district"
+                                x-model="district"
+                                required
+                                class="input input-bordered w-full"
+                                placeholder="Masukkan nama kecamatan"
+                            />
+                        </div>
+
+                        <div class="form-control w-full">
+                            <label class="label">
+                                <span class="label-text">Kode Pos</span>
+                            </label>
+                            <input
+                                type="text"
+                                name="postal_code"
+                                x-model="postal_code"
+                                required
+                                pattern="\d{5}"
+                                class="input input-bordered w-full"
+                                placeholder="Masukkan Kode Pos 5 digit"
+                            />
+                        </div>
+
+                        <div class="form-control w-full">
+                            <label class="label">
+                                <span class="label-text">Alamat Lengkap</span>
+                            </label>
+                            <textarea
+                                name="street_address"
+                                x-model="street_address"
+                                required
+                                class="textarea textarea-bordered h-24"
+                                placeholder="Masukkan alamat lengkap (jalan, nomor rumah, dll)"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-control w-full mb-4">
+                    <label class="label">
+                        <span class="label-text">Jumlah</span>
+                    </label>
+                    <input
+                        type="number"
+                        name="quantity"
+                        x-model.number="quantity"
+                        min="1"
+                        max="{{ product.stock }}"
+                        class="input input-bordered w-full"
+                    />
+                </div>
+
+                <div class="form-control w-full mb-4">
+                    <label class="label">
+                        <span class="label-text">Catatan (Opsional)</span>
+                    </label>
+                    <textarea
+                        name ="notes"
+                        x-model="notes"
+                        class="textarea textarea-bordered h-24"
+                        placeholder="Tambahkan catatan untuk pesanan Anda"
+                    ></textarea>
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-full"
+                    :disabled="{{ product.stock }} == 0"
+                >
+                    Beli Sekarang
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Deskripsi Lengkap -->
+    <div class="mt-8 bg-base-100 p-6 rounded-lg shadow-md">
+        <h2 class="text-xl md:text-2xl font-bold mb-4">Deskripsi Produk</h2>
+        <div class="prose max-w-none text-sm md:text-base">
+            {{ product.description|safe }}
+        </div>
+    </div>
+
+    <!-- Produk Terkait -->
+    <div class="mt-8">
+        <h2 class="text-xl md:text-2xl font-bold mb-4">Produk Terkait</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {% for related_product in related_products %}
+                <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+                    <figure>
+                        <img
+                            src="{{ related_product.image.url }}"
+                            alt="{{ related_product.name }}"
+                            class="w-full h-32 md:h-48 object-cover"
+                        />
+                    </figure>
+                    <div class="card-body p-3 md:p-4">
+                        <h3 class="card-title text-xs md:text-sm">
+                            {{ related_product.name|truncatechars:30 }}
+                        </h3>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs md:text-sm text-primary font-bold">
+                                Rp {{ related_product.price|floatformat:0 }}
+                            </span>
+                            <a
+                                href="{% url 'landingpage:product_detail' related_product.slug %}"
+                                class="btn btn-xs btn-primary"
+                            >
+                                Lihat
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function orderForm() {
+        return {
+            name: '',
+            whatsapp: '',
+            province: '',
+            city: '',
+            district: '',
+            postal_code: '',
+            street_address: '',
+            quantity: 1,
+            notes: '',
+
+            get isWhatsAppValid() {
+                const whatsappRegex = /^(^\+62|62|^08)\d{8,13}$/
+                return whatsappRegex.test(this.whatsapp)
+            },
+
+            get isPostalCodeValid() {
+                return /^\d{5}$/.test(this.postal_code)
+            },
+
+            get isFormValid() {
+                return this.name.trim() !== '' &&
+                       this.isWhatsAppValid &&
+                       this.province.trim() !== '' &&
+                       this.city.trim() !== '' &&
+                       this.district.trim() !== '' &&
+                       this.isPostalCodeValid &&
+                       this.street_address.trim() !== '' &&
+                       this.quantity > 0
+            },
+
+            submitForm() {
+                if (this.isFormValid) {
+                    this.$el.submit()
+                } else {
+                    alert('Mohon lengkapi form dengan benar')
+                }
+            }
+        }
+    }
+</script>
+{% endblock %}
