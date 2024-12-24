@@ -5,9 +5,29 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'navbar.html' %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'navbar.html' %}
 
+    {% if allkategori %}
+        <div class="relative flex items-center w-full max-w-4xl mx-auto">
+            <!-- Left Scroll Button -->
+            <button class="absolute left-0 z-10 bg-transparent p-2 text-2xl text-white cursor-pointer hover:bg-gray-700 rounded-full transition-colors" onclick="scrollLeft()">‹</button>
+
+            <!-- Categories Wrapper -->
+            <div class="categories-wrapper flex overflow-x-auto gap-4 py-4 px-2 w-full scroll-smooth scrollbar-hide">
+                {% for kategori in allkategori %}
+                <!-- Categories Item -->
+                <div class="flex-shrink-0 px-6 py-2 bg-[#1d23a] text-white text-sm font-medium cursor-pointer">
+                    <a class="font-medium" href="{% url 'landingpage:product_by_filter' category_id=kategori.id %}">{{ kategori }}</a>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Right Scroll Button -->
+            <button class="absolute right-0 z-10 bg-transparent p-2 text-2xl text-white cursor-pointer hover:bg-gray-700 rounded-full transition-colors" onclick="scrollRight()">›</button>
+        </div>
+
+    {% endif %}
     <!-- Hero Section -->
     <div class="hero min-h-[400px] bg-base-200">
         <div class="hero-content flex-col lg:flex-row-reverse">
@@ -52,9 +72,7 @@
                     </div>
                 </div>
             </div>
-{#            <div class="text-center lg:text-right">#}
-{#                <img src="{% static 'images/trust-illustration.svg' %}" alt="Trust Illustration" class="max-w-sm rounded-lg shadow-2xl" />#}
-{#            </div>#}
+
         </div>
     </div>
 
@@ -102,4 +120,22 @@
             </div>
         {% endfor %}
     </div>
+    <script>
+function scrollLeft() {
+  const container = document.querySelector('.categories-wrapper');
+  container.scrollBy({
+    left: -200,  // Adjust the number of pixels to scroll
+    behavior: 'smooth',
+  });
+}
+
+function scrollRight() {
+  const container = document.querySelector('.categories-wrapper');
+  container.scrollBy({
+    left: 200,  // Adjust the number of pixels to scroll
+    behavior: 'smooth',
+  });
+}
+</script>
+
 {% endblock %}

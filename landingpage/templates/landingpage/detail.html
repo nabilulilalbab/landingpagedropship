@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
 {% include 'navbar.html' %}
@@ -38,6 +39,9 @@
 
             <!-- Deskripsi Singkat -->
             <p class="mb-4 text-sm md:text-base text-gray-600">{{ product.hook }}</p>
+
+
+
 
             <!-- Stok dan Kondisi -->
             <div class="flex flex-wrap gap-4 mb-4">
@@ -225,7 +229,6 @@
             </form>
         </div>
     </div>
-
     <!-- Deskripsi Lengkap -->
     <div class="mt-8 bg-base-100 p-6 rounded-lg shadow-md">
         <h2 class="text-xl md:text-2xl font-bold mb-4">Deskripsi Produk</h2>
@@ -233,6 +236,219 @@
             {{ product.description|safe }}
         </div>
     </div>
+
+<!-- Komponen Kepercayaan dengan Dark Mode -->
+<div class="bg-[#1d23a] text-white rounded-lg shadow-xl p-6 mt-8">
+    <div class="grid md:grid-cols-3 gap-6">
+        <!-- Jaminan Kepuasan -->
+        <div class="text-center bg-[#7480ff]/20 p-4 rounded-lg hover:bg-[#7480ff]/30 transition-all">
+            <div class="flex justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#7480ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h3 class="font-bold mb-2 text-[#7480ff]">Garansi Kepuasan</h3>
+            <p class="text-sm text-gray-300">Uang kembali jika tidak sesuai ekspektasi</p>
+        </div>
+
+        <!-- Pengiriman Cepat -->
+        <div class="text-center bg-[#7480ff]/20 p-4 rounded-lg hover:bg-[#7480ff]/30 transition-all">
+            <div class="flex justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#7480ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h3 class="font-bold mb-2 text-[#7480ff]">Pengiriman Cepat</h3>
+            <p class="text-sm text-gray-300">Kirim dalam 1-2 hari kerja</p>
+        </div>
+
+        <!-- Pembayaran Aman -->
+        <div class="text-center bg-[#7480ff]/20 p-4 rounded-lg hover:bg-[#7480ff]/30 transition-all">
+            <div class="flex justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#7480ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+            </div>
+            <h3 class="font-bold mb-2 text-[#7480ff]">Pembayaran Aman</h3>
+            <p class="text-sm text-gray-300">Metode pembayaran terpercaya</p>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonial Dark Mode -->
+<div class="bg-[#1d23a] text-white mt-8 rounded-lg shadow-xl p-6">
+    <h2 class="text-2xl font-bold text-center mb-6 text-[#7480ff]">Testimoni Pelanggan</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-[#7480ff]/10 p-4 rounded-lg hover:bg-[#7480ff]/20 transition-all">
+            <div class="flex items-center mb-4">
+                <div class="w-12 h-12 bg-[#7480ff] rounded-full mr-4 flex items-center justify-center text-white font-bold">
+                    SK
+                </div>
+                <div>
+                    <h4 class="font-bold text-[#7480ff]">Sarah K.</h4>
+                    <div class="flex text-yellow-400">
+                        ★★★★★
+                    </div>
+                </div>
+            </div>
+            <p class="text-gray-300">"Produk sangat berkualitas dan pengiriman cepat. Sangat puas!"</p>
+        </div>
+        <div class="bg-[#7480ff]/10 p-4 rounded-lg hover:bg-[#7480ff]/20 transition-all">
+            <div class="flex items-center mb-4">
+                <div class="w-12 h-12 bg-[#7480ff] rounded-full mr-4 flex items-center justify-center text-white font-bold">
+                    AR
+                </div>
+                <div>
+                    <h4 class="font-bold text-[#7480ff]">Ahmad R.</h4>
+                    <div class="flex text-yellow-400">
+                        ★★★★★
+                    </div>
+                </div>
+            </div>
+            <p class="text-gray-300">"Pelayanan customer service yang ramah dan responsif"</p>
+        </div>
+    </div>
+</div>
+
+<!-- Keunggulan Produk Dark Mode -->
+<div class="bg-[#1d23a] text-white mt-8 rounded-lg shadow-xl p-6">
+    <h2 class="text-2xl font-bold text-center mb-6 text-[#7480ff]">Mengapa Memilih Kami?</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+        <div class="flex items-start bg-[#7480ff]/10 p-4 rounded-lg hover:bg-[#7480ff]/20 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-[#7480ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+                <h3 class="font-bold text-[#7480ff]">Kualitas Terjamin</h3>
+                <p class="text-sm text-gray-300">Produk dipilih dengan standar kualitas tinggi</p>
+            </div>
+        </div>
+        <div class="flex items-start bg-[#7480ff]/10 p-4 rounded-lg hover:bg-[#7480ff]/20 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-[#7480ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 -9l-9 18 9-2 9-18-9 2z" />
+            </svg>
+            <div>
+                <h3 class="font-bold text-[#7480ff]">Dukungan Pelanggan</h3>
+                <p class="text-sm text-gray-300">Tim support siap membantu 24/7</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- all image hook -->
+{% if image_byproduct %}
+<div
+    x-data="{
+        images: [
+            {% for image in image_byproduct %}
+                {% if image.image %}'{{ image.image.url }}',{% endif %}
+            {% endfor %}
+        ],
+        selectedImage: null,
+        currentIndex: 0,
+
+        openModal(imageUrl) {
+            this.selectedImage = imageUrl;
+            this.currentIndex = this.images.indexOf(imageUrl);
+        },
+
+        closeModal() {
+            this.selectedImage = null;
+        },
+
+        nextImage() {
+            this.currentIndex = (this.currentIndex + 1) % this.images.length;
+            this.selectedImage = this.images[this.currentIndex];
+        },
+
+        prevImage() {
+            this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+            this.selectedImage = this.images[this.currentIndex];
+        }
+    }"
+    class="container mx-auto px-4 py-8"
+>
+    <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-800">
+        Galeri Produk
+    </h2>
+
+    <div class="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
+        {% for image in image_byproduct %}
+            {% if image.image %}
+                <div
+                    @click="openModal('{{ image.image.url }}')"
+                    class="relative group cursor-pointer"
+                >
+                    <img
+                        src="{{ image.image.url }}"
+                        alt="{{ product.name }} - Gambar {{ forloop.counter }}"
+                        class="w-full h-24 md:h-36 object-cover rounded-lg transform transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 rounded-lg transition-all duration-300 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Modal Popup -->
+    <template x-if="selectedImage" x-cloak>
+        <div
+            class="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center p-4"
+            @click.self="closeModal"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+        >
+            <div class="relative max-w-4xl w-full">
+                <!-- Tombol Close -->
+                <button
+                    @click="closeModal"
+                    class="absolute -top-10 right-0 text-white text-3xl hover:text-gray-300"
+                >
+                    ✕
+                </button>
+
+                <!-- Gambar Popup -->
+                <img
+                    x-bind:src="selectedImage"
+                    class="max-w-full max-h-[80vh] object-contain rounded-lg mx-auto"
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="transform scale-90 opacity-0"
+                    x-transition:enter-end="transform scale-100 opacity-100"
+                />
+
+                <!-- Navigasi Gambar -->
+                <div class="flex justify-between mt-4">
+                    <button
+                        @click="prevImage"
+                        class="bg-white/20 hover:bg-white/40 text-white p-2 rounded-full"
+                    >
+                        ←
+                    </button>
+                    <button
+                        @click="nextImage"
+                        class="bg-white/20 hover:bg-white/40 text-white p-2 rounded-full"
+                    >
+                        →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+</div>
+{% endif %}
+    <!-- end -->
+
+
 
     <!-- Produk Terkait -->
     <div class="mt-8">
@@ -268,10 +484,50 @@
         </div>
     </div>
 </div>
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox-plus-jquery.min.js"></script>
 {% endblock %}
 
 {% block extra_js %}
+
 <script>
+
+    function imageGallery() {
+    return {
+        images: [
+            {% for image in image_byproduct %}
+                {% if image.image %}
+                    "{{ image.image.url }}",
+                {% endif %}
+            {% endfor %}
+        ],
+        selectedImage: null,
+        currentIndex: 0,
+
+        openImage(imageUrl) {
+            this.selectedImage = imageUrl;
+            this.currentIndex = this.images.indexOf(imageUrl);
+            document.body.style.overflow = 'hidden';
+        },
+
+        closeImage() {
+            this.selectedImage = null;
+            document.body.style.overflow = 'auto';
+        },
+
+        prevImage() {
+            this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+            this.selectedImage = this.images[this.currentIndex];
+        },
+
+        nextImage() {
+            this.currentIndex = (this.currentIndex + 1) % this.images.length;
+            this.selectedImage = this.images[this.currentIndex];
+        }
+    }
+}
+
+
+
     function orderForm() {
         return {
             name: '',
@@ -315,3 +571,5 @@
     }
 </script>
 {% endblock %}
+
+

@@ -1,20 +1,31 @@
+from unicodedata import category
+
 from django.contrib import messages
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, Order
-
+from .models import Product, Order, Category, ProductImage
 
 
 # Create your views here.
 def product_list(request):
     allproduct = Product.objects.all()
+    allkategori = Category.objects.all()
 
-    return render(request, 'landingpage/index.html', {'allproduct': allproduct})
+    return render(request, 'landingpage/index.html', {'allproduct': allproduct, 'allkategori': allkategori})
 
+
+def Product_by_filter(request, category_id):
+    byfilter = Product.objects.filter(category=category_id)
+    allkategori = Category.objects.all()
+
+    return render(request, 'landingpage/index.html', {'allproduct': byfilter, 'allkategori': allkategori})
 
 def product_detail(request, slug):
     # Ambil produk spesifik
     product = get_object_or_404(Product, slug=slug, is_active=True)
+
+    image_byproduct = ProductImage.objects.filter(product=product)
+
 
     # Produk terkait (dalam kategori yang sama)
     related_products = Product.objects.filter(
@@ -24,7 +35,8 @@ def product_detail(request, slug):
 
     context = {
         'product': product,
-        'related_products': related_products
+        'related_products': related_products,
+        'image_byproduct': image_byproduct,
     }
     return render(request, 'landingpage/detail.html', context)
 
