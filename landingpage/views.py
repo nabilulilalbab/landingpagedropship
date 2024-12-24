@@ -104,3 +104,5 @@ def create_order(request, slug):
     return redirect('landingpage:product_detail', slug=slug)
 
 
+def tentang(request):
+    return render(request, 'landingpage/tentang.html')

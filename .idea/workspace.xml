@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ddf398fc-b30b-4b46-845d-41b2f26a2301" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/landingpage/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/landingpage/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/landingpage/templates/landingpage/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/landingpage/templates/landingpage/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/landingpage/templates/landingpage/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/landingpage/templates/landingpage/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/landingpage/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/landingpage/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/landingpage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/landingpage/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +106,7 @@
       <updated>1734959635445</updated>
       <workItem from="1734959636483" duration="3513000" />
       <workItem from="1734966205263" duration="16886000" />
-      <workItem from="1735052591001" duration="10218000" />
+      <workItem from="1735052591001" duration="11217000" />
     </task>
     <servers />
   </component>

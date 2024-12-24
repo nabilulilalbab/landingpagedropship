@@ -2,11 +2,11 @@
     <nav class="bg-[#1d23a] shadow-md">
         <div class="container mx-auto flex justify-between items-center p-4">
             <div class="flex items-center">
-                <a href="{% url 'landingpage:product_list' %}" class="text-2xl font-bold text-white">BrandLogo</a>
+                <a href="{% url 'landingpage:product_list' %}" class="text-2xl font-bold text-white">IrawanShop</a>
             </div>
             <div class="hidden md:flex space-x-4">
                 <a href="{% url 'landingpage:product_list' %}" class="text-white hover:text-gray-300">Produk</a>
-                <a href="#" class="text-white hover:text-gray-300">Tentang Kami</a>
+                <a href="{% url 'landingpage:tentang' %}" class="text-white hover:text-gray-300">Tentang Kami</a>
             </div>
             <div class="hidden md:flex">
                 <a href="https://wa.me/6287742028130" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Contact WhatsApp</a>
