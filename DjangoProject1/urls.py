@@ -1,3 +1,4 @@
+
 """
 URL configuration for DjangoProject1 project.
 

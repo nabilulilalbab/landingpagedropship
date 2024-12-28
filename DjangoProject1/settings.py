@@ -23,9 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-nf8ejc%eh7z9#v3tvf9xbl(vlj_p3266oz*8b^o&-5c#91((pv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+CSRF_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['obedient-code-rud.sgp.dom.my.id','*']
+CSRF_TRUSTED_ORIGINS = [
+    "https://obedient-code-rud.sgp.dom.my.id",
+    "http://obedient-code-rud.sgp.dom.my.id",
+    "http://localhost"
+]
 
 
 # Application definition
@@ -48,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoProject1.urls'
@@ -122,5 +129,16 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+#STATIC_URL = '/static/'  # URL publik untuk file statis
+#STATIC_ROOT = '/home/obedient-code-rud/public_html/DjangoProject1/staticfiles/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+  # Direktori tempat file akan dikumpulkan
+STATICFILES_DIRS = [  # Direktori tambahan untuk file statis
+    BASE_DIR / "static",
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Gunakan file statis yang dikompresi
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

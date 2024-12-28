@@ -1,39 +1,43 @@
- <!-- Navbar -->
-    <nav class="bg-[#1d23a] shadow-md">
-        <div class="container mx-auto flex justify-between items-center p-4">
-            <div class="flex items-center">
-                <a href="{% url 'landingpage:product_list' %}" class="text-2xl font-bold text-white">IrawanShop</a>
-            </div>
-            <div class="hidden md:flex space-x-4">
-                <a href="{% url 'landingpage:product_list' %}" class="text-white hover:text-gray-300">Produk</a>
-                <a href="{% url 'landingpage:tentang' %}" class="text-white hover:text-gray-300">Tentang Kami</a>
-            </div>
-            <div class="hidden md:flex">
-                <a href="https://wa.me/6287742028130" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Contact WhatsApp</a>
-            </div>
-            <div class="md:hidden">
-                <button id="menu-toggle" class="text-white focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-            </div>
+<!-- Navbar -->
+<nav class="navbar bg-base-200 shadow-md">
+    <div class="container mx-auto">
+        <div class="flex-1">
+            <a href="{% url 'landingpage:product_list' %}" class="text-2xl font-bold text-primary">IrawanShop</a>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden">
-            <a href="{% url 'landingpage:product_list' %}" class="block text-white hover:text-gray-300 px-4 py-2">Produk</a>
-            <a href="#" class="block text-white hover:text-gray-300 px-4 py-2">Tentang Kami</a>
-            <div class="flex flex-col p-4">
-                <a href="https://wa.me/6287742028130" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mb-2">Contact WhatsApp</a>
-            </div>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex flex-none gap-4">
+            <a href="{% url 'landingpage:product_list' %}" class="btn btn-ghost text-base-content">Produk</a>
+            <a href="{% url 'landingpage:tentang' %}" class="btn btn-ghost text-base-content">Tentang Kami</a>
+            <a href="https://wa.me/6287742028130" class="btn btn-success text-white">Contact WhatsApp</a>
         </div>
-    </nav>
 
-    <script>
-        // Toggle mobile menu
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
+        <!-- Mobile Menu Button -->
+        <div class="flex-none md:hidden">
+            <button id="menu-toggle" class="btn btn-ghost text-base-content">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav>
 
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="hidden md:hidden bg-base-200">
+    <div class="flex flex-col p-4">
+        <a href="{% url 'landingpage:product_list' %}" class="btn btn-ghost text-base-content w-full justify-start mb-2">Produk</a>
+        <a href="{% url 'landingpage:tentang' %}" class="btn btn-ghost text-base-content w-full justify-start mb-2">Tentang Kami</a>
+        <a href="https://wa.me/6287742028130" class="btn btn-success text-white w-full">Contact WhatsApp</a>
+    </div>
+</div>
+
+<script>
+    // Toggle mobile menu
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>
